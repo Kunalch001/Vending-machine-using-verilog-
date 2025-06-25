@@ -1,0 +1,30 @@
+module test;
+    reg start;
+    reg [1:0] select;
+    wire [3:0] item_code;
+
+    // Instantiate the DUT
+    random uut (
+        .start(start),
+        .select(select),
+        .item_code(item_code)
+    );
+
+    initial begin
+        $display("Time\tStart\tSelect\tItem_Code");
+        $monitor("%0t\t%b\t%0d\t%0d", $time, start, select, item_code);
+
+        // Coke test
+        start = 1; select = 2'd0; #10;
+        // Milkshake test
+        start = 1; select = 2'd1;#10;
+        // Fruit juice test
+        start = 1; select = 2'd2; #10;
+        // Lemon juice test
+        start = 1; select = 2'd3; #10;
+        // Invalid input (start = 0)
+        start = 0; select = 2'd2; #10;
+
+        $finish;
+    end
+endmodule
