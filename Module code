@@ -1,0 +1,40 @@
+module random(
+    input start,
+    input [1:0] select,
+    output reg [3:0] item_code
+);
+
+    always @(*) begin
+        if (start) begin
+            case (select)
+                2'd0: begin
+                    $display("Coke is purchased");
+                    item_code = 4'd1;
+                end
+                2'd1: begin
+                    $display("Milkshake is purchased");
+                    item_code = 4'd2;
+                end
+                2'd2: begin
+                    $display("Fruit juice is purchased");
+                    item_code = 4'd3;
+                end
+                2'd3: begin
+                    $display("Lemon Juice is purchased");
+                    item_code = 4'd4;
+                end
+                default: begin
+                    $display("Invalid selection, Returning to start");
+                    item_code = 4'd0;
+                end
+            endcase
+        end
+        else begin
+            $display("Invalid input, Returning to start");
+            item_code = 4'd0;
+        end
+    end
+
+endmodule
+
+
